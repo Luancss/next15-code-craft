@@ -25,6 +25,7 @@ const THEME_ICONS: Record<string, React.ReactNode> = {
 export const ThemeSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const mounted = useMounted();
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
@@ -43,7 +44,11 @@ export const ThemeSelector = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // if (!mounted) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="relative" ref={dropdownRef}>
