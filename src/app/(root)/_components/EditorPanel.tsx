@@ -8,6 +8,7 @@ import Image from "next/image";
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { useMounted } from "@/hooks/useMounted";
+import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 
 export const EditorPanel = () => {
   const clerk = useClerk();
@@ -143,7 +144,7 @@ export const EditorPanel = () => {
             />
           )}
 
-          {/* {!clerk.loaded && <EditorPanelSkeleton />} */}
+          {!clerk.loaded && <EditorPanelSkeleton />}
         </div>
       </div>
       {/* {isShareDialogOpen && (
