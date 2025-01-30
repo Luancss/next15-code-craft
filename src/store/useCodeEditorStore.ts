@@ -155,5 +155,6 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
   };
 });
 
-export const getExecutionResult = () =>
-  useCodeEditorStore.getState().executionResult;
+export const getExecutionResult = () => {
+  return useCodeEditorStore.getState().executionResult;
+};

@@ -1,20 +1,33 @@
 "use client";
 
-import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import {
+  getExecutionResult,
+  useCodeEditorStore,
+} from "@/store/useCodeEditorStore";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { div } from "framer-motion/client";
 import { Loader2, Play } from "lucide-react";
+import { saveExecution } from "../../../../convex/codeExecutions";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
 
 export const RunButton = () => {
   const { user } = useUser();
   const { runCode, language, isRunning, executionResult } =
     useCodeEditorStore();
+  const saveExecution = useMutation(api.codeExecutions.saveExecution);
 
   const handleRun = async () => {
     await runCode();
-    if (user && executionResult) {
-      // TODO: add to db
+    const result = getExecutionResult();
+    if (user && result) {
+      await saveExecution({
+        language,
+        code: result.code,
+        output: result.output || undefined,
+        error: result.error || undefined,
+      });
     }
   };
   return (
