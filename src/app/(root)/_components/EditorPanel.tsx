@@ -107,7 +107,7 @@ export const EditorPanel = () => {
                from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
             >
               <ShareIcon className="size-4 text-white" />
-              <span className="text-sm font-medium text-white ">Share</span>
+              <span className="text-sm font-medium text-white">Share</span>
             </motion.button>
           </div>
         </div>
