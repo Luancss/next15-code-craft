@@ -169,3 +169,46 @@ export const starSnippet = mutation({
     }
   },
 });
+
+export const addComment = mutation({
+  args: {
+    snippetId: v.id("snippets"),
+    content: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_user_id")
+      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .first();
+
+    if (!user) throw new Error("User not found");
+
+    return await ctx.db.insert("snippetComments", {
+      snippetId: args.snippetId,
+      userId: identity.subject,
+      userName: user.name,
+      content: args.content,
+    });
+  },
+});
+
+export const deleteComment = mutation({
+  args: { commentId: v.id("snippetComments") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const comment = await ctx.db.get(args.commentId);
+    if (!comment) throw new Error("Comment not found");
+
+    if (comment.userId !== identity.subject) {
+      throw new Error("Not authorized to delete this comment");
+    }
+
+    await ctx.db.delete(args.commentId);
+  },
+});
