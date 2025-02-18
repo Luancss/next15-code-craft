@@ -8,6 +8,7 @@ import { ThemeSelector } from "./ThemeSelector";
 import { LanguageSelector } from "./LanguageSelector";
 import { RunButton } from "./RunButton";
 import { HeaderProfileBtn } from "./HeaderProfileBtn";
+import { StarGithub } from "./githubBtn";
 
 export async function Header() {
   const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -45,7 +46,7 @@ export async function Header() {
               </span>
             </div>
           </Link>
-          <nav className="flex items-center space-x-1">
+          <nav className="flex items-center space-x-3">
             <Link
               href="/snippets"
               className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 
@@ -63,16 +64,17 @@ export async function Header() {
                 Snippets
               </span>
             </Link>
+            <StarGithub />
           </nav>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <ThemeSelector />
-            <LanguageSelector hasAccess={Boolean(convexUser?.isPro)} />
+            <LanguageSelector hasAccess={true} />
           </div>
 
-          {!convexUser?.isPro && (
+          {/* {!convexUser?.isPro && (
             <Link
               href="/pricing"
               className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-amber-500/20 hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 
@@ -84,7 +86,7 @@ export async function Header() {
                 Pro
               </span>
             </Link>
-          )}
+          )} */}
 
           <SignedIn>
             <RunButton />
