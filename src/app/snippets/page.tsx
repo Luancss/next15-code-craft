@@ -112,6 +112,7 @@ function SnippetsPage() {
                   `}
               >
                 <div className="flex items-center gap-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/${lang}.png`}
                     alt={lang}
