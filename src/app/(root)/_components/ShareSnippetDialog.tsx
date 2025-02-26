@@ -22,7 +22,7 @@ export const ShareSnippetDialog = ({ onClose }: { onClose: () => void }) => {
       onClose();
       setTitle("");
       toast.success("Snippet shared successfully");
-    } catch (error) {
+    } catch {
       toast.error("Error creating snippet");
     } finally {
       setIsSharing(false);

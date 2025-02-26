@@ -6,16 +6,13 @@ import {
 } from "@/store/useCodeEditorStore";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
-import { div } from "framer-motion/client";
 import { Loader2, Play } from "lucide-react";
-import { saveExecution } from "../../../../convex/codeExecutions";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 
 export const RunButton = () => {
   const { user } = useUser();
-  const { runCode, language, isRunning, executionResult } =
-    useCodeEditorStore();
+  const { runCode, language, isRunning } = useCodeEditorStore();
   const saveExecution = useMutation(api.codeExecutions.saveExecution);
 
   const handleRun = async () => {

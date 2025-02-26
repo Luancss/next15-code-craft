@@ -35,6 +35,7 @@ const SnippetDetailPage = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-4">
                 <div className="flex items-center justify-center size-12 rounded-xl bg-[#ffffff08] p-2.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/${snippet.language}.png`}
                     alt={`${snippet.language} logo`}

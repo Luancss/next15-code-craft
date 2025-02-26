@@ -99,6 +99,7 @@ export const ProfileHeader = ({
             className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full 
           blur-xl opacity-50 group-hover:opacity-75 transition-opacity"
           />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={user.imageUrl}
             alt="Profile"
